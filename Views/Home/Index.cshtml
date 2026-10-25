@@ -2,30 +2,135 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6 text-center">
-        <h1 class="display-5 mb-3">StudentAdminPortal</h1>
+<!-- Hero -->
+<div class="row align-items-center g-4 py-4">
+    <div class="col-lg-6">
+        <h1 class="display-5 fw-bold mb-3">
+            Manage Students<br />
+            <span class="text-primary">with Ease</span>
+        </h1>
         <p class="text-muted mb-4">
-            Manage student registrations from a single protected admin portal.
+            A simple and secure student management system for administrators.
+            Keep track of student records, manage data and get insights — all in one place.
         </p>
 
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <div class="d-flex gap-2 justify-content-center">
-                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary px-4">Go to Dashboard</a>
-                <a asp-controller="Students" asp-action="Index" class="btn btn-outline-primary px-4">View Students</a>
+            <div class="d-flex gap-2 flex-wrap">
+                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary px-4 py-2">Go to Dashboard</a>
+                <a asp-controller="Students" asp-action="Index" class="btn btn-outline-primary px-4 py-2">View Students</a>
             </div>
         }
         else
         {
-            <div class="d-flex gap-2 justify-content-center">
-                <a asp-controller="Account" asp-action="Login" class="btn btn-primary px-4">Admin Login</a>
-                <a asp-controller="Account" asp-action="Setup" class="btn btn-outline-primary px-4">First-Time Setup</a>
+            <div class="d-flex gap-2 flex-wrap">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-primary px-4 py-2">Login</a>
+                <a href="#features" class="btn btn-outline-primary px-4 py-2">Learn More</a>
             </div>
-            <p class="text-muted small mt-4">
-                First-time setup creates the administrator account. Once an administrator
-                exists, the setup page stops working and only login is available.
+            <p class="text-muted small mt-3 mb-0">
+                First time here? <a asp-controller="Account" asp-action="Setup">Create the administrator account</a>.
+                Once an administrator exists, setup stops working and only login is available.
             </p>
         }
+    </div>
+    <div class="col-lg-6">
+        <div class="hero-illustration" role="img" aria-label="Illustration of the student management dashboard">
+            <svg viewBox="0 0 480 300" width="100%" height="auto" role="presentation">
+                <rect x="10" y="10" width="460" height="280" rx="16" fill="#ffffff" stroke="#E2E8F0" />
+                <circle cx="32" cy="30" r="6" fill="#FCA5A5" />
+                <circle cx="52" cy="30" r="6" fill="#FCD34D" />
+                <circle cx="72" cy="30" r="6" fill="#86EFAC" />
+                <rect x="10" y="46" width="110" height="244" fill="#F8FAFC" />
+                <rect x="24" y="62" width="82" height="12" rx="6" fill="#2563EB" />
+                <rect x="24" y="86" width="82" height="12" rx="6" fill="#E2E8F0" />
+                <rect x="24" y="110" width="82" height="12" rx="6" fill="#E2E8F0" />
+                <rect x="24" y="134" width="82" height="12" rx="6" fill="#E2E8F0" />
+                <rect x="140" y="62" width="150" height="14" rx="7" fill="#0F172A" />
+                <rect x="140" y="90" width="96" height="58" rx="10" fill="#ffffff" stroke="#E2E8F0" />
+                <rect x="248" y="90" width="96" height="58" rx="10" fill="#ffffff" stroke="#E2E8F0" />
+                <rect x="356" y="90" width="96" height="58" rx="10" fill="#ffffff" stroke="#E2E8F0" />
+                <rect x="152" y="100" width="48" height="10" rx="5" fill="#E2E8F0" />
+                <rect x="152" y="118" width="64" height="14" rx="7" fill="#2563EB" />
+                <rect x="260" y="100" width="48" height="10" rx="5" fill="#E2E8F0" />
+                <rect x="260" y="118" width="64" height="14" rx="7" fill="#2563EB" />
+                <rect x="368" y="100" width="48" height="10" rx="5" fill="#E2E8F0" />
+                <rect x="368" y="118" width="64" height="14" rx="7" fill="#2563EB" />
+                <rect x="140" y="164" width="312" height="108" rx="10" fill="#ffffff" stroke="#E2E8F0" />
+                <rect x="160" y="232" width="26" height="26" fill="#93C5FD" rx="4" />
+                <rect x="196" y="212" width="26" height="46" fill="#60A5FA" rx="4" />
+                <rect x="232" y="192" width="26" height="66" fill="#2563EB" rx="4" />
+                <rect x="268" y="222" width="26" height="36" fill="#93C5FD" rx="4" />
+                <rect x="304" y="202" width="26" height="56" fill="#60A5FA" rx="4" />
+                <rect x="356" y="182" width="76" height="10" rx="5" fill="#E2E8F0" />
+                <rect x="356" y="200" width="76" height="10" rx="5" fill="#E2E8F0" />
+                <rect x="356" y="218" width="56" height="10" rx="5" fill="#E2E8F0" />
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Features -->
+<div id="features" class="row g-3 py-4">
+    <div class="col-md-6 col-lg-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <span class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </span>
+                <h2 class="h6 mb-1">Secure</h2>
+                <p class="text-muted small mb-0">Your data is protected with secure authentication.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <span class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                </span>
+                <h2 class="h6 mb-1">Easy to Use</h2>
+                <p class="text-muted small mb-0">Clean and simple interface.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <span class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                </span>
+                <h2 class="h6 mb-1">Manage Students</h2>
+                <p class="text-muted small mb-0">Add, edit and delete student records.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+                <span class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="20" x2="12" y2="10" />
+                        <line x1="18" y1="20" x2="18" y2="4" />
+                        <line x1="6" y1="20" x2="6" y2="16" />
+                    </svg>
+                </span>
+                <h2 class="h6 mb-1">Get Insights</h2>
+                <p class="text-muted small mb-0">View statistics and recent activity.</p>
+            </div>
+        </div>
     </div>
 </div>

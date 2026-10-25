@@ -4,11 +4,22 @@
     ViewData["Title"] = "Add Student";
 }
 
+<p class="mb-3">
+    <a asp-action="Index">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Back to Students
+    </a>
+</p>
+
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
         <div class="card shadow-sm">
             <div class="card-body p-4">
-                <h1 class="h3 card-title mb-1">Add Student</h1>
+                <h1 class="h3 card-title mb-1">Add New Student</h1>
                 <p class="text-muted mb-4">Fill in the details below to register a new student.</p>
 
                 <form asp-action="Create" method="post" novalidate>
@@ -42,7 +53,7 @@
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary px-4">Save</button>
+                        <button type="submit" class="btn btn-primary px-4">Save Student</button>
                         <a asp-action="Index" class="btn btn-secondary px-4">Cancel</a>
                     </div>
                 </form>

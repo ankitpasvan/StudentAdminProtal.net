@@ -1,3 +1,28 @@
+/* StudentAdminPortal design system.
+   Primary: royal blue #2563EB. Backgrounds: white + very light blue-gray.
+   Text: dark navy + readable gray. No gradients, no heavy shadows. */
+
+:root {
+  --portal-primary: #2563EB;
+  --portal-primary-hover: #1D4ED8;
+  --portal-primary-active: #1E40AF;
+  --portal-primary-soft: #EFF6FF;
+  --portal-bg: #F1F5F9;
+  --portal-surface: #F8FAFC;
+  --portal-navy: #0F172A;
+  --portal-gray: #64748B;
+  --portal-gray-dark: #334155;
+  --portal-border: #E2E8F0;
+  --portal-danger: #DC2626;
+  --portal-danger-soft: #FEF2F2;
+  --portal-radius: .75rem;
+  --portal-radius-sm: .5rem;
+  /* Bootstrap hooks so bg-primary / text-primary / links follow the palette. */
+  --bs-primary-rgb: 37, 99, 235;
+  --bs-link-color: #2563EB;
+  --bs-link-hover-color: #1D4ED8;
+}
+
 html {
   font-size: 14px;
 }
@@ -8,10 +33,6 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -19,6 +40,12 @@ html {
 
 body {
   margin-bottom: 60px;
+  color: var(--portal-navy);
+}
+
+/* Public pages sit on a very light blue-gray background; cards stay white. */
+body.portal-public {
+  background-color: var(--portal-surface);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -30,24 +57,344 @@ body {
   text-align: start;
 }
 
-.card {
-  border-radius: 0.75rem;
+/* ---- Buttons (Bootstrap variables, so btn-primary etc. follow the palette) ---- */
+.btn {
+  border-radius: var(--portal-radius-sm);
+  font-weight: 500;
 }
 
+.btn-primary {
+  --bs-btn-bg: #2563EB;
+  --bs-btn-border-color: #2563EB;
+  --bs-btn-hover-bg: #1D4ED8;
+  --bs-btn-hover-border-color: #1D4ED8;
+  --bs-btn-active-bg: #1E40AF;
+  --bs-btn-active-border-color: #1E40AF;
+  --bs-btn-disabled-bg: #2563EB;
+  --bs-btn-disabled-border-color: #2563EB;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #2563EB;
+  --bs-btn-border-color: #2563EB;
+  --bs-btn-hover-bg: #2563EB;
+  --bs-btn-hover-border-color: #2563EB;
+  --bs-btn-active-bg: #1D4ED8;
+  --bs-btn-active-border-color: #1D4ED8;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, .25);
+}
+
+.btn-link.nav-link:focus {
+  box-shadow: none;
+}
+
+/* ---- Forms ---- */
 .form-label {
   font-weight: 600;
+  color: var(--portal-navy);
+}
+
+.form-control, .form-select {
+  border-radius: var(--portal-radius-sm);
+  border-color: var(--portal-border);
+  padding: .6rem .9rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--portal-primary);
 }
 
 .field-validation-error {
   font-size: 0.875rem;
+  color: var(--portal-danger);
 }
 
+.input-validation-error {
+  border-color: var(--portal-danger);
+}
+
+.input-validation-error:focus {
+  border-color: var(--portal-danger);
+  box-shadow: 0 0 0 0.25rem rgba(220, 38, 38, .25);
+}
+
+/* ---- Cards ---- */
+.card {
+  border-radius: var(--portal-radius);
+  border: 1px solid var(--portal-border);
+}
+
+/* ---- Tables ---- */
 .table thead th {
   font-weight: 600;
 }
 
+.portal-table {
+  background: #fff;
+}
+
+.portal-table thead th {
+  background: var(--portal-surface);
+  color: var(--portal-gray-dark);
+  border-bottom: 1px solid var(--portal-border);
+  padding: .8rem 1rem;
+  white-space: nowrap;
+}
+
+.portal-table tbody td {
+  padding: .8rem 1rem;
+  color: var(--portal-gray-dark);
+  border-color: var(--portal-border);
+}
+
+/* ---- Brand mark (graduation cap) ---- */
+.brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: .5rem;
+  background: rgba(255, 255, 255, .2);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brand-mark-solid {
+  background: var(--portal-primary);
+  color: #fff;
+}
+
+.portal-brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 700;
+  color: var(--portal-navy);
+  text-decoration: none;
+}
+
+.portal-brand:hover {
+  color: var(--portal-navy);
+}
+
+/* ---- Admin layout: sidebar + top bar ---- */
+.portal-admin {
+  display: flex;
+  min-height: 100vh;
+  background: var(--portal-bg);
+}
+
+.portal-sidebar {
+  --bs-offcanvas-width: 260px;
+  background: #fff;
+  border-right: 1px solid var(--portal-border);
+}
+
+@media (min-width: 992px) {
+  .portal-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+}
+
+.portal-sidebar-brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--portal-border);
+}
+
+.portal-nav {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: .75rem;
+}
+
+.portal-nav-link {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .65rem .9rem;
+  border-radius: var(--portal-radius-sm);
+  color: var(--portal-gray-dark);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.portal-nav-link:hover {
+  background: var(--portal-surface);
+  color: var(--portal-navy);
+}
+
+.portal-nav-link.active {
+  background: var(--portal-primary-soft);
+  color: var(--portal-primary);
+}
+
+.portal-admin-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.portal-topbar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .8rem 1.25rem;
+  background: #fff;
+  border-bottom: 1px solid var(--portal-border);
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.portal-content {
+  flex-grow: 1;
+  padding: 1.5rem;
+}
+
+.portal-admin-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--portal-border);
+  background: #fff;
+}
+
+/* ---- Avatars ---- */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--portal-primary);
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.avatar-sm {
+  width: 32px;
+  height: 32px;
+  font-size: .85rem;
+}
+
+.avatar-lg {
+  width: 56px;
+  height: 56px;
+  font-size: 1.25rem;
+}
+
+/* ---- Stat cards ---- */
 .display-stat {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1.2;
+  color: var(--portal-navy);
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: .65rem;
+  background: var(--portal-primary-soft);
+  color: var(--portal-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---- Icon action buttons (table actions) ---- */
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--portal-radius-sm);
+  border: 1px solid var(--portal-border);
+  background: #fff;
+  color: var(--portal-gray-dark);
+  text-decoration: none;
+}
+
+.icon-btn:hover {
+  color: var(--portal-primary);
+  border-color: var(--portal-primary);
+}
+
+.icon-btn-danger:hover {
+  color: var(--portal-danger);
+  border-color: #FECACA;
+  background: var(--portal-danger-soft);
+}
+
+/* ---- Empty states ---- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #fff;
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+}
+
+.empty-state-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 1rem;
+  background: var(--portal-primary-soft);
+  color: var(--portal-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* ---- Auth cards ---- */
+.auth-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  background: var(--portal-primary-soft);
+  color: var(--portal-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Red variant of an icon chip (delete confirmation). */
+.icon-chip-danger {
+  background: var(--portal-danger-soft);
+  color: var(--portal-danger);
+}
+
+/* ---- Home hero illustration ---- */
+.hero-illustration {
+  background: #DBEAFE;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: .75rem;
+  background: var(--portal-primary-soft);
+  color: var(--portal-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .75rem;
 }

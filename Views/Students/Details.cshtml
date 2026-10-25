@@ -2,34 +2,50 @@
 
 @{
     ViewData["Title"] = "Student Details";
+    var initials = string.Concat(Model.FirstName.Take(1), Model.LastName.Take(1)).ToUpperInvariant();
+    if (initials.Length == 0)
+    {
+        initials = "?";
+    }
 }
+
+<p class="mb-3">
+    <a asp-action="Index">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Back to Students
+    </a>
+</p>
 
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
         <div class="card shadow-sm">
             <div class="card-body p-4">
-                <h1 class="h3 card-title mb-4">Student Details</h1>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <span class="avatar avatar-lg" aria-hidden="true">@initials</span>
+                    <span>
+                        <h1 class="h3 card-title mb-0">@Model.FullName</h1>
+                        <span class="text-muted">@Model.Email</span>
+                    </span>
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary ms-auto">Edit</a>
+                </div>
 
                 <dl class="row mb-4">
-                    <dt class="col-sm-4">Student ID</dt>
-                    <dd class="col-sm-8">@Model.Id</dd>
-
-                    <dt class="col-sm-4">Full Name</dt>
-                    <dd class="col-sm-8">@Model.FullName</dd>
-
-                    <dt class="col-sm-4">Email</dt>
-                    <dd class="col-sm-8">@Model.Email</dd>
-
                     <dt class="col-sm-4">Course</dt>
                     <dd class="col-sm-8">@Model.Course</dd>
 
-                    <dt class="col-sm-4">Registered</dt>
+                    <dt class="col-sm-4">Registration Date</dt>
                     <dd class="col-sm-8">@Model.RegistrationDate.ToLocalTime().ToString("dd MMM yyyy, HH:mm")</dd>
+
+                    <dt class="col-sm-4">Student ID</dt>
+                    <dd class="col-sm-8">@Model.Id</dd>
                 </dl>
 
                 <div class="d-flex gap-2">
-                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4">Edit</a>
-                    <a asp-action="Index" class="btn btn-secondary px-4">Back to List</a>
+                    <a asp-action="Index" class="btn btn-secondary px-4">Back to Students</a>
                 </div>
             </div>
         </div>
