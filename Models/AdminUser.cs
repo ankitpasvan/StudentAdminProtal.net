@@ -1,7 +1,5 @@
 namespace StudentAdminPortal.Models;
 
-// One row per administrator. Passwords are NEVER stored here as plain text:
-// PasswordHash holds the output of ASP.NET Core's PasswordHasher<AdminUser>.
 public class AdminUser
 {
     public int Id { get; set; }

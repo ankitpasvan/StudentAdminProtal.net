@@ -25,7 +25,7 @@ public class Student
     [StringLength(100, ErrorMessage = "Course cannot exceed 100 characters.")]
     public string Course { get; set; } = string.Empty;
 
-    // Set by the database (DEFAULT SYSUTCDATETIME()), never entered in a form.
+
     [Display(Name = "Registration Date")]
     public DateTime RegistrationDate { get; set; }
 

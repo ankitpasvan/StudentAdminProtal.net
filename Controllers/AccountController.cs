@@ -10,8 +10,7 @@ using StudentAdminPortal.Models;
 
 namespace StudentAdminPortal.Controllers;
 
-// Login, logout and first-run setup. There is deliberately NO public
-// registration: the setup page works only while zero administrators exist.
+
 public class AccountController : Controller
 {
     private readonly AdminUserRepository _admins;
@@ -27,7 +26,7 @@ public class AccountController : Controller
     [AllowAnonymous]
     public IActionResult Login(string? returnUrl = null)
     {
-        // Already logged in? Skip the login form and go to the dashboard.
+
         if (User.Identity?.IsAuthenticated == true)
         {
             return RedirectToAction("Index", "Dashboard");
@@ -89,8 +88,7 @@ public class AccountController : Controller
         return RedirectToAction("Index", "Dashboard");
     }
 
-    // POST: /Account/Logout (POST only, with anti-forgery, so a link or image
-    // on another site cannot log the admin out).
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Logout()
@@ -100,7 +98,6 @@ public class AccountController : Controller
         return RedirectToAction("Login");
     }
 
-    // GET: /Account/Setup — first-run only.
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> Setup()
@@ -112,20 +109,19 @@ public class AccountController : Controller
         }
         catch (SqlException)
         {
-            // Database unreachable: show the setup page with a connection
-            // error instead of crashing, so the admin sees what to fix.
+
             ViewData["DatabaseError"] = true;
             return View();
         }
         if (count > 0)
         {
-            // An administrator already exists: setup is permanently closed.
+
             return RedirectToAction("Login");
         }
         return View();
     }
 
-    // POST: /Account/Setup — creates the FIRST administrator account.
+
     [HttpPost]
     [AllowAnonymous]
     [ValidateAntiForgeryToken]
@@ -154,13 +150,13 @@ public class AccountController : Controller
             }
 
             var admin = new AdminUser { Username = model.Username, Email = model.Email };
-            // Only the hash is stored. The plain password never reaches the database.
+
             admin.PasswordHash = _passwordHasher.HashPassword(admin, model.Password);
             await _admins.CreateAsync(admin);
         }
         catch (SqlException ex) when (ex.Number is 2601 or 2627)
         {
-            // Unique-index violation (race between the checks above and the insert).
+
             ModelState.AddModelError(string.Empty, "This username or email is already registered.");
             return View(model);
         }

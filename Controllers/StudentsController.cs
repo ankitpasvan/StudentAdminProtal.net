@@ -6,7 +6,7 @@ using StudentAdminPortal.Models;
 
 namespace StudentAdminPortal.Controllers;
 
-// Every action here requires a logged-in administrator.
+
 [Authorize]
 public class StudentsController : Controller
 {
@@ -17,7 +17,7 @@ public class StudentsController : Controller
         _students = students;
     }
 
-    // GET: /Students (optional ?search= term searches name or email)
+
     public async Task<IActionResult> Index(string? search)
     {
         ViewData["CurrentSearch"] = search;
@@ -27,7 +27,6 @@ public class StudentsController : Controller
         return View(students);
     }
 
-    // GET: /Students/Details/5
     public async Task<IActionResult> Details(int id)
     {
         var student = await _students.GetByIdAsync(id);
@@ -38,13 +37,13 @@ public class StudentsController : Controller
         return View(student);
     }
 
-    // GET: /Students/Create
+
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: /Students/Create
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(Student student)
@@ -64,7 +63,7 @@ public class StudentsController : Controller
         }
         catch (SqlException ex) when (ex.Number is 2601 or 2627)
         {
-            // Unique-index violation (race between the check above and the insert).
+
             ModelState.AddModelError(nameof(student.Email), "This email is already registered.");
             return View(student);
         }
@@ -72,7 +71,7 @@ public class StudentsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // GET: /Students/Edit/5
+
     public async Task<IActionResult> Edit(int id)
     {
         var student = await _students.GetByIdAsync(id);
@@ -83,7 +82,7 @@ public class StudentsController : Controller
         return View(student);
     }
 
-    // POST: /Students/Edit/5
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, Student student)
@@ -118,7 +117,7 @@ public class StudentsController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    // GET: /Students/Delete/5 (confirmation page)
+
     public async Task<IActionResult> Delete(int id)
     {
         var student = await _students.GetByIdAsync(id);
@@ -129,7 +128,7 @@ public class StudentsController : Controller
         return View(student);
     }
 
-    // POST: /Students/Delete/5
+
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)

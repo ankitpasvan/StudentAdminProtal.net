@@ -3,9 +3,7 @@ using StudentAdminPortal.Models;
 
 namespace StudentAdminPortal.Data;
 
-// All database access for students, using ADO.NET only (no EF Core, no Dapper).
-// Every query is parameterized, every call is async, and every connection,
-// command and reader is disposed with await using.
+
 public class StudentRepository
 {
     private readonly string _connectionString;
@@ -120,8 +118,7 @@ public class StudentRepository
         return await command.ExecuteNonQueryAsync() > 0;
     }
 
-    // Case-insensitive check (SQL Server's default collation). excludeId lets Edit
-    // ignore the student's own row, so saving without changing the email passes.
+
     public async Task<bool> EmailExistsAsync(string email, int? excludeId = null)
     {
         await using var connection = CreateConnection();
@@ -159,7 +156,7 @@ public class StudentRepository
         return students;
     }
 
-    // Dashboard statistics, calculated from the real tables in one query.
+
     public async Task<(int TotalStudents, int TotalCourses)> GetStatisticsAsync()
     {
         await using var connection = CreateConnection();

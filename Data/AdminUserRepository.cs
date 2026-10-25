@@ -3,9 +3,7 @@ using StudentAdminPortal.Models;
 
 namespace StudentAdminPortal.Data;
 
-// All database access for administrator accounts, using ADO.NET only.
-// Password hashing lives in AccountController (PasswordHasher<AdminUser>);
-// this repository only stores and reads the resulting hash, never plain text.
+
 public class AdminUserRepository
 {
     private readonly string _connectionString;

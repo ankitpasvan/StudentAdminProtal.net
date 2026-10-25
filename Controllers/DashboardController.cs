@@ -5,8 +5,6 @@ using StudentAdminPortal.Models;
 
 namespace StudentAdminPortal.Controllers;
 
-// Every action here requires a logged-in administrator. Unauthenticated
-// visitors are redirected to /Account/Login by the cookie configuration.
 [Authorize]
 public class DashboardController : Controller
 {

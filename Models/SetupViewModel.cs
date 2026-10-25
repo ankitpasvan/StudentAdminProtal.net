@@ -2,8 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StudentAdminPortal.Models;
 
-// Used ONLY by the first-run setup page (/Account/Setup). Once an administrator
-// exists, the setup page stops working, so there is no public registration.
+
 public class SetupViewModel
 {
     [Required(ErrorMessage = "Username is required.")]
