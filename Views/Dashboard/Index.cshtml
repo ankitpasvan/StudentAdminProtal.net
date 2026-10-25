@@ -1,0 +1,77 @@
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3 mb-0">Dashboard</h1>
+    <span class="text-muted">Welcome, @User.Identity?.Name</span>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Total Students</p>
+                <p class="display-stat mb-0">@Model.TotalStudents</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <p class="text-muted mb-1">Distinct Courses</p>
+                <p class="display-stat mb-0">@Model.TotalCourses</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex gap-2 mb-4">
+    <a asp-controller="Students" asp-action="Create" class="btn btn-primary">Add Student</a>
+    <a asp-controller="Students" asp-action="Index" class="btn btn-outline-primary">View All Students</a>
+</div>
+
+<h2 class="h5 mb-3">Recent Registrations</h2>
+
+@if (!Model.RecentStudents.Any())
+{
+    <div class="alert alert-info" role="alert">
+        No students are registered yet.
+        <a asp-controller="Students" asp-action="Create" class="alert-link">Register the first student</a>.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>Registered</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model.RecentStudents)
+                {
+                    <tr>
+                        <td>@student.FullName</td>
+                        <td>@student.Email</td>
+                        <td>@student.Course</td>
+                        <td>@student.RegistrationDate.ToLocalTime().ToString("dd MMM yyyy")</td>
+                        <td class="text-end text-nowrap">
+                            <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id"
+                               class="btn btn-sm btn-outline-secondary">Details</a>
+                            <a asp-controller="Students" asp-action="Edit" asp-route-id="@student.Id"
+                               class="btn btn-sm btn-outline-primary">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

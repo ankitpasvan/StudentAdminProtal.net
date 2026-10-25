@@ -29,3 +29,25 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.form-label {
+  font-weight: 600;
+}
+
+.field-validation-error {
+  font-size: 0.875rem;
+}
+
+.table thead th {
+  font-weight: 600;
+}
+
+.display-stat {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+}

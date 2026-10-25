@@ -1,0 +1,73 @@
+@model SetupViewModel
+
+@{
+    ViewData["Title"] = "Create Administrator Account";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 class="h3 card-title mb-1">Create Administrator Account</h1>
+                <p class="text-muted mb-4">
+                    This is a one-time setup. Once an administrator account exists,
+                    this page stops working and no public registration is available.
+                </p>
+
+                @if (ViewData["DatabaseError"] is true)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        Could not connect to the database. Check that SQL Server Express is running,
+                        that the <code>StudentAdminPortalDB</code> database exists (see
+                        <code>Database/Setup.sql</code>), and that the connection string in
+                        <code>appsettings.json</code> is correct — then refresh this page.
+                    </div>
+                }
+                else
+                {
+                    <form asp-action="Setup" method="post" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label"></label>
+                            <input asp-for="Username" class="form-control" placeholder="Choose a username"
+                                   autocomplete="username" autofocus />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" placeholder="Admin email address"
+                                   autocomplete="email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" placeholder="At least 8 characters"
+                                   autocomplete="new-password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="ConfirmPassword" class="form-label"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Repeat the password"
+                                   autocomplete="new-password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2">Create Administrator Account</button>
+                    </form>
+                }
+
+                <p class="text-muted small mt-4 mb-0">
+                    Already have an account? <a asp-action="Login">Log in</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
